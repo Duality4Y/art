@@ -2,7 +2,7 @@
 
 CFLAGS=-Wall -pedantic
 
-all: artpoll artdmxtest white-colour multi-midi stars police artmonitor
+all: test artpoll artdmxtest white-colour multi-midi stars police artmonitor
 
 artpoll: artpoll.c
 artmonitor: artmonitor.c
@@ -13,5 +13,9 @@ stars: stars.c artdmx.c dmxmain.c
 multi-midi: multi-midi.c artdmx.c dmxmain.c -lasound
 police: police.c artdmx.c dmxmain.c
 
+#duality testing
+test: test.c artdmx.c dmxmain.c
+#---------------
+
 clean:
-	rm -f artpoll artmonitor artdmxtest white-colour stars multi-midi police
+	rm -f test artpoll artmonitor artdmxtest white-colour stars multi-midi police
