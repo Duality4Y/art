@@ -1,4 +1,7 @@
-/* stars.c */
+/*
+ * Based upon stars.c
+ * Made by Duality
+ * */
 
 #include <string.h>
 #include <stdlib.h>
