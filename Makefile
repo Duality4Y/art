@@ -18,4 +18,4 @@ test: test.c artdmx.c dmxmain.c
 #---------------
 
 clean:
-	rm -f test artpoll artmonitor artdmxtest white-colour stars multi-midi police
+	rm -f artpoll artmonitor artdmxtest white-colour stars multi-midi police test

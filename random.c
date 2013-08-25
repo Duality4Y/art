@@ -16,8 +16,6 @@
         } while (0)
 
 #define FIELDSIZE 150
-bool field[FIELDSIZE];
-int *rBright, *bBright, *gBright;
 
 void makeRandomField(bool *field, int *rBright, int *gBright, int *bBright, int maxBright)
 {
@@ -31,7 +29,7 @@ void makeRandomField(bool *field, int *rBright, int *gBright, int *bBright, int 
 	*bBright = rand()%maxBright;
 	
 	printf("max brightness %d \n", maxBright);
-	printf("brightness at display: r,%d, g,%d, b,%d \n", *rBright, *gBright, *bBright);
+	printf("brightnes: %d %d %d\n",*rBright, *gBright, *bBright);
 	
 	while(i<FIELDSIZE)
 	{
@@ -51,6 +49,7 @@ void makeRandomField(bool *field, int *rBright, int *gBright, int *bBright, int 
 void displayField(bool *field,int *rBright,int *gBright,int *bBright)
 {
 	int i=0;
+	printf("brightness at display: %d, %d, %d \n", *rBright, *gBright, *bBright);
 	while(i<FIELDSIZE)
 	{
 		if(field[i])
@@ -68,16 +67,18 @@ void displayField(bool *field,int *rBright,int *gBright,int *bBright)
 
 void init_pattern(char *dmx_universe)
 {
-	int maxBright = 30;
+	bool field[FIELDSIZE];
+	int *rBright, *bBright, *gBright;
+	int maxBright = 10;
 	
 	memset(dmx_universe, 0, 450);
 	memset(field, 0, FIELDSIZE);
 	
 	makeRandomField(field, &rBright, &gBright, &bBright, maxBright);
-	//displayField(field, &rBright, &gBright, &bBright);
+	displayField(field, &rBright, &gBright, &bBright);
 }
 void generate_pattern(char *dmx_universe)
 {
-	displayField(field, &rBright, &gBright, &bBright);
+	//displayField(field, &rBright, &gBright, &bBright);
 }
 
