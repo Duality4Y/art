@@ -2,7 +2,7 @@
 
 CFLAGS=-Wall -pedantic
 
-all: artpoll artdmxtest white-colour multi-midi stars police artmonitor test colour-stars random-leds shifting-random-leds
+all: artpoll artdmxtest white-colour multi-midi stars police artmonitor test colour-stars random-leds shifting-random-leds test1
 
 artpoll: artpoll.c
 artmonitor: artmonitor.c
@@ -18,7 +18,8 @@ test: test.c artdmx.c dmxmain.c
 colour-stars: colour-stars.c artdmx.c dmxmain.c
 random-leds: random-leds.c artdmx.c dmxmain.c
 shifting-random-leds: shifting-random-leds.c artdmx.c dmxmain.c
+test1: test1.c artdmx.c dmxmain.c
 #---------------
 
 clean:
-	rm -f artpoll artmonitor artdmxtest white-colour stars multi-midi police test colour-stars random-leds shifting-random-leds
+	rm -f artpoll artmonitor artdmxtest white-colour stars multi-midi police test colour-stars random-leds shifting-random-leds test1

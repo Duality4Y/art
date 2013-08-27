@@ -62,16 +62,16 @@ void init_pattern(char *dmx_universe)
 	srand(time(0));
 }
 
-float pos = 0;
-int *rBright, *bBright, *gBright;
-int maxBright = 100;
-
-int interval = 1.5e5;
-
 void generate_pattern(char *dmx_universe)
 {
-	makeRandomField(field, &rBright, &gBright, &bBright, maxBright);
-	displayField(field, &rBright, &gBright, &bBright);
+	int *rBrightness, *bBrightness, *gBrightness;
+	int maxBrightness = 100;
+	
+	//halve a second. 1000000 = 1 sec
+	int interval = 1.5e5;
+	
+	makeRandomField(field, &rBrightness, &gBrightness, &bBrightness, maxBrightness);
+	displayField(field, &rBrightness, &gBrightness, &bBrightness);
 	usleep(interval);
 }
 
