@@ -65,10 +65,10 @@ void init_pattern(char *dmx_universe)
 void generate_pattern(char *dmx_universe)
 {
 	int *rBrightness, *bBrightness, *gBrightness;
-	int maxBrightness = 100;
+	int maxBrightness = 80;
 	
 	//halve a second. 1000000 = 1 sec
-	int interval = 1.5e5;
+	int interval = 0.1e6;
 	
 	makeRandomField(field, &rBrightness, &gBrightness, &bBrightness, maxBrightness);
 	displayField(field, &rBrightness, &gBrightness, &bBrightness);

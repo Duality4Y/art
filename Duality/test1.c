@@ -15,62 +15,27 @@
                 dmx_universe[3*c+2] = b;        \
         } while (0)
 
-#define FIELDSIZE 150
-bool field[FIELDSIZE];
+#define surviveAbility 2
+#define reproductiveNumber 3
 
-#define CELL(I,J) (field[size*(I)+(J)])
-#define ALIVE(I,J) t[size*(I)+(J)] = 1
-#define DEAD(I,J)  t[size*(I)+(J)] = 0
- 
-int count_alive(const char *field, int i, int j, int size)
+#define fieldWidth 7
+#define fieldHeight 21 //22
+#define byte_type uint8_t
+
+byte_type field[fieldSize+1] = {0};
+
+int checkUpper()
 {
-	int x, y, a=0;
-	for(x=i-1; x <= (i+1) ; x++)
+	if(Position-fieldWidt > 0)
 	{
-		for(y=j-1; y <= (j+1) ; y++)
-		{
-			if ( (x==i) && (y==j) ) continue;
-			if ( (y<size) && (x<size) &&
-				(x>=0)   && (y>=0) )
-			{
-				a += CELL(x,y);
-			}
-		}
-	}
-	return a;
-}
- 
-void evolve(const char *field, char *t, int size)
-{
-	int i, j, alive, cs;
-	for(i=0; i < size; i++)
-	{
-		for(j=0; j < size; j++)
-		{
-			alive = count_alive(field, i, j, size);
-			cs = CELL(i,j);
-			if ( cs )
-			{
-				if ( (alive > 3) || ( alive < 2 ) )
-					DEAD(i,j);
-				else
-					ALIVE(i,j);
-			} else {
-				if ( alive == 3 )
-					ALIVE(i,j);
-				else
-					DEAD(i,j);
-			}
-		}
+		
 	}
 }
 
-void makeRandomField(bool *field, int *rBright, int *gBright, int *bBright, int maxBright)
+void makeRandomField(char *field, int *rBright, int *gBright, int *bBright, int maxBright)
 {
 	int i = 0;
 	int printWidth = 4;
-	
-	srand(time(0));
 	
 	*rBright = rand()%maxBright;
 	*gBright = rand()%maxBright;
@@ -79,7 +44,7 @@ void makeRandomField(bool *field, int *rBright, int *gBright, int *bBright, int 
 	printf("max brightness %d \n", maxBright);
 	printf("brightnes: %d %d %d\n",*rBright, *gBright, *bBright);
 	
-	while(i<FIELDSIZE)
+	while(i<(FIELDSIZE*FIELDSIZE))
 	{
 		field[i] = rand()%2;
 		
@@ -92,9 +57,11 @@ void makeRandomField(bool *field, int *rBright, int *gBright, int *bBright, int 
 		i++;
 	}
 	printf(" \n");
+	
+	
 }
 
-void displayField(bool *field,int *rBright,int *gBright,int *bBright)
+void displayField(const char *field,int *rBright,int *gBright,int *bBright)
 {
 	int i=0;
 	while(i<FIELDSIZE)
@@ -111,21 +78,21 @@ void displayField(bool *field,int *rBright,int *gBright,int *bBright)
 	}
 }
 
+int *rBrightness, *bBrightness, *gBrightness;
+int maxBrightness = 40;
+
 void init_pattern(char *dmx_universe)
 {
+	srand(time(0));
 	memset(dmx_universe, 0, 450);
-	memset(field, 0, FIELDSIZE);
+	memset(field, 0, FIELDSIZE*FIELDSIZE);
+	memset(temp_field, 0, FIELDSIZE*FIELDSIZE);
 	
-	//makeRandomField(field, &rBright, &gBright, &bBright, maxBright);
-	//displayField(field, &rBright, &gBright, &bBright);
+	makeRandomField(field, &rBrightness, &gBrightness, &bBrightness, maxBrightness);
+	
 }
+
 void generate_pattern(char *dmx_universe)
 {
-	int *rBrightness, *bBrightness, *gBrightness;
-	
-	int maxBrightness = 100;
-	
-	//makeRandomField(field, &rBrightness, &gBrightness, &bBrightness, maxBrightness);
-	displayField(field, &rBrightness, &gBrightness, &bBrightness);
 }
 
