@@ -175,7 +175,7 @@ inline int checkLowerRight()
 	}
 }
 
-inline int totalAround()
+inline unsigned int totalAround()
 {
 	unsigned int around = checkUpper()+checkLower()+checkLeft()+checkRight()+checkUpperLeft()+checkUpperRight()+checkLowerLeft()+checkLowerRight();
 	return around;
@@ -190,28 +190,28 @@ void makeRandomField(byte_type *field, int *rBright, int *gBright, int *bBright,
 	*gBright = rand()%maxBright;
 	*bBright = rand()%maxBright;
 	
-	printf("max brightness %d \n", maxBright);
-	printf("brightnes: %d %d %d\n",*rBright, *gBright, *bBright);
+	//printf("max brightness %d \n", maxBright);
+	//printf("brightnes: %d %d %d\n",*rBright, *gBright, *bBright);
 	
 	while(i < FIELDSIZE)
 	{
 		field[i] = rand()%2;
 		
 		//for a pretty print
-		printf("i:%d\tdata:%d\t\t",(int)i, (int)field[i]);
-		if(!(i%printWidth))
-		{
-			printf(" \n");
-		}
+		//printf("i:%d\tdata:%d\t\t",(int)i, (int)field[i]);
+		//if(!(i%printWidth))
+		//{
+			//printf(" \n");
+		//}
 		i++;
 	}
-	printf(" \n");
+	//printf(" \n");
 }
 
 inline void displayField(byte_type *field,int *rBright,int *gBright,int *bBright)
 {
 	int i;
-	for(i = 0;i<FIELDSIZE;i++)
+	for(i = FIELDSIZE;i--;)
 	{
 		if(field[i])
 			SET_LED(i, *rBright, *gBright, *bBright);
@@ -247,23 +247,48 @@ inline void DisplayField(byte_type *field,int position, int *rBright,int *gBrigh
 
 inline void evolve(byte_type *field)
 {
-	if(field[Position])
+	//if(field[Position])
+	//{
+		//if(totalAround() == surviveAbility || totalAround == surviveAbility+1)
+		//{
+			//field[Position] = 1;
+		//}
+		//else
+		//{
+			//field[Position] = 0;
+		//}
+	//}
+	//else
+	//{
+		//if(totalAround() == reproductiveNumber)
+		//{
+			//field[Position] = 1;
+		//}
+	//}
+	unsigned int TotalAround = totalAround();
+	switch(field[Position])
 	{
-		if(totalAround() == surviveAbility || totalAround == surviveAbility+1)
-		{
-			field[Position] = 1;
-		}
-		else
-		{
-			field[Position] = 0;
-		}
-	}
-	else
-	{
-		if(totalAround() == reproductiveNumber)
-		{
-			field[Position] = 1;
-		}
+		case 1:
+			switch(TotalAround)
+			{
+				case surviveAbility:
+					field[Position] = 1;
+					break;
+				case surviveAbility+1:
+					field[Position] = 1;
+					break;
+				default:
+					field[Position] = 0;
+			}
+			break;
+		case 0:
+			switch(TotalAround)
+			{
+				case reproductiveNumber:
+					field[Position] = 1;
+					break;
+			}
+			break;
 	}
 	Position++;
 	if(Position==FIELDSIZE)
@@ -274,16 +299,16 @@ inline void evolve(byte_type *field)
 unsigned int *rBrightness, *bBrightness, *gBrightness;
 unsigned int maxBrightness = 40;
 
-void init_pattern(char *dmx_universe)
+inline void init_pattern(char *dmx_universe)
 {
 	memset(dmx_universe, 0, 450);
 	memset(field, 0, FIELDSIZE);
-	
+	srand(time(0));
 	makeRandomField(field, &rBrightness, &gBrightness, &bBrightness, maxBrightness);
 	
 }
 
-void generate_pattern(char *dmx_universe)
+inline void generate_pattern(char *dmx_universe)
 {
 	evolve(field);
 	displayField(field, &rBrightness, &gBrightness, &bBrightness);
