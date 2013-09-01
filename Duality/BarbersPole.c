@@ -17,7 +17,7 @@
 
 float pos;
 int i = 0;
-int fadeVal = 35;
+int fadeVal = 255;
 
 void init_pattern(char *dmx_universe)
 {
@@ -27,7 +27,7 @@ void init_pattern(char *dmx_universe)
 
 void generate_pattern(char *dmx_universe)
 {	
-	for(i = 0;i<154;i++)
+	for(i = 0;i<155;i++)
 	{
 		if(!(i%6))
 		{
@@ -35,11 +35,10 @@ void generate_pattern(char *dmx_universe)
 			SET_LED(i+pos-3, fadeVal,0,0);
 		}
 	}
-	pos+=1;
+	pos+=0.5;
 	if(pos >= 7.0)
 	{
 		pos = 0.0;
 	}
-	usleep(50000);
 }
 
