@@ -27,7 +27,7 @@ void init_pattern(char *dmx_universe)
 
 void generate_pattern(char *dmx_universe)
 {	
-	for(i = 0;i<156;i++)
+	for(i = 0;i<154;i++)
 	{
 		if(!(i%6))
 		{
