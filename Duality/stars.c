@@ -42,7 +42,7 @@ void generate_pattern(char *dmx_universe)
 		r = r / (RAND_MAX/150);
 		if (r >= 150)
 			r = 149;
-		SET_LED(r, rand()%255, rand()%255, rand()%255);
+		SET_LED(r, 255, 255, 255);
 	}
 }
 
