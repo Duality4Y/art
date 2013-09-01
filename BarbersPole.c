@@ -1,8 +1,6 @@
 /* police.c */
 
 #include <string.h>
-#include <stdio.h>
-#include <time.h>
 #include <math.h>
 
 #include "artdmx.h"
@@ -17,28 +15,31 @@
                 dmx_universe[3*c+2] = b;        \
         } while (0)
 
+float pos;
+int i = 0;
+int fadeVal = 35;
+
 void init_pattern(char *dmx_universe)
 {
 	memset(dmx_universe, 0, 450);
+	pos = 0.0;
 }
 
 void generate_pattern(char *dmx_universe)
-{
-	static int i;
-	static float pos,place;
-	for(i = 0;i<153;i++)
+{	
+	for(i = 0;i<=153;i++)
 	{
-		int fadeVal = 255;
 		if(!(i%6))
 		{
 			SET_LED(i+pos, fadeVal,fadeVal,fadeVal);
-			SET_LED(i+pos-3, fadeVal/255*112,0,0);
+			SET_LED(i+pos-3, fadeVal,0,0);
 		}
 	}
-	pos+=0.2;
+	pos+=1;
 	if(pos >= 7.0)
 	{
 		pos = 0.0;
 	}
+	usleep(50000);
 }
 
