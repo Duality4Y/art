@@ -312,6 +312,6 @@ inline void generate_pattern(char *dmx_universe)
 {
 	evolve(field);
 	displayField(field, &rBrightness, &gBrightness, &bBrightness);
-	//DisplayField(field,Position, &rBrightness, &gBrightness, &bBrightness);
+	DisplayField(field,Position, &rBrightness, &gBrightness, &bBrightness);
 }
 

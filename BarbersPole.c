@@ -38,7 +38,7 @@ void generate_pattern(char *dmx_universe)
 	pos+=0.5;
 	if(pos >= 7.0)
 	{
-		pos = 0.0;
+		pos -= 7.0;
 	}
 }
 
