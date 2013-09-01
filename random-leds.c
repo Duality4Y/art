@@ -31,22 +31,22 @@ void makeRandomField(bool *field, int *rBright, int *gBright, int *bBright, int 
 	*gBright = rand()%maxBright;
 	*bBright = rand()%maxBright;
 	
-	printf("max brightness %d \n", maxBright);
-	printf("brightnes: %d %d %d\n",*rBright, *gBright, *bBright);
+	//printf("max brightness %d \n", maxBright);
+	//printf("brightnes: %d %d %d\n",*rBright, *gBright, *bBright);
 	
 	while(i<FIELDSIZE)
 	{
 		field[i] = rand()%2;
 		
 		//for a pretty print
-		printf("i:%d\tdata:%d\t\t",(int)i, (int)field[i]);
-		if(!(i%printWidth))
-		{
-			printf(" \n");
-		}
+		//printf("i:%d\tdata:%d\t\t",(int)i, (int)field[i]);
+		//if(!(i%printWidth))
+		//{
+			//printf(" \n");
+		//}
 		i++;
 	}
-	printf(" \n");
+	//printf(" \n");
 }
 
 void displayField(bool *field,int *rBright,int *gBright,int *bBright)
