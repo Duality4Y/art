@@ -8,16 +8,24 @@
 
 #define min(a, b) ((a)<(b)?(a):(b))
 
-#define SET_LED(ch, r, g, b) do {               \
-                int c = 149-ch;                 \
-                dmx_universe[3*c] = r;          \
-                dmx_universe[3*c+1] = g;        \
-                dmx_universe[3*c+2] = b;        \
-        } while (0)
+#define backwards
+#ifndef backwards
+	#define DIRECTION 
+#else
+	#define DIRECTION 149-
+#endif
 
-float pos;
-int i = 0;
-int fadeVal = 255;
+void set_led(int ch, int r, int g, int b, unsigned char *universe)
+{
+	int c = DIRECTION ch;
+	universe[c*3] = r;
+	universe[c*3+1] = g;
+	universe[c*3+2] = b;
+}
+
+int pos, val;
+int i;
+int fadeVal = 30;
 
 void init_pattern(char *dmx_universe)
 {
@@ -27,18 +35,19 @@ void init_pattern(char *dmx_universe)
 
 void generate_pattern(char *dmx_universe)
 {	
-	for(i = 0;i<155;i++)
+	for(i = 0;i<153;i++)
 	{
 		if(!(i%6))
 		{
-			SET_LED(i+pos, fadeVal,fadeVal,fadeVal);
-			SET_LED(i+pos-3, fadeVal,0,0);
+			set_led(i+pos, fadeVal,fadeVal,fadeVal,dmx_universe);
+			set_led(i+pos-3, fadeVal,0,0, dmx_universe);
 		}
 	}
-	pos+=0.5;
-	if(pos >= 7.0)
+	pos+=1;
+	if(pos >= 6)
 	{
-		pos -= 7.0;
+		pos -= 6;
 	}
+	usleep(100000);
 }
 
